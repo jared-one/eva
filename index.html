@@ -175,6 +175,7 @@
             border-color: rgba(183, 148, 246, 0.6);
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(183, 148, 246, 0.3);
         }
 
         /* Optimized Canvas Background */
@@ -234,33 +235,18 @@
             opacity: 1;
         }
 
-        /* Wish Lanterns Canvas */
-        #lanternCanvas {
+        /* Shooting Stars Canvas */
+        #shootingStarCanvas {
             position: fixed;
             inset: 0;
-            z-index: 6;
-            opacity: 0;
-            transition: opacity 2s ease;
-            cursor: pointer;
-        }
-
-        #lanternCanvas.visible {
-            opacity: 1;
-        }
-
-        /* Birthday Cake Canvas */
-        #cakeCanvas {
-            position: fixed;
-            inset: 0;
-            z-index: 7;
+            z-index: 2;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 2s ease;
         }
 
-        #cakeCanvas.visible {
+        #shootingStarCanvas.visible {
             opacity: 1;
-            pointer-events: auto;
         }
 
         /* Container */
@@ -448,89 +434,41 @@
             50% { transform: scaleY(1.5); }
         }
 
-        /* Interactive Cake Section */
-        .cake-section {
+        /* Interactive Hint */
+        .interactive-hint {
             text-align: center;
-            margin: 50px auto;
-            padding: 40px 20px;
+            margin: 40px auto;
+            padding: 20px;
             max-width: 600px;
             background: linear-gradient(
                 135deg,
-                rgba(255, 255, 255, 0.02),
-                rgba(255, 255, 255, 0.05)
+                rgba(255, 107, 157, 0.1),
+                rgba(183, 148, 246, 0.1)
             );
-            border-radius: 25px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             opacity: 0;
             animation: fadeInScale 1s forwards 0.9s;
         }
 
-        .cake-title {
-            font-size: 1.5em;
+        .hint-title {
+            font-size: 1.3em;
             margin-bottom: 10px;
-            color: var(--cosmic-accent);
-            font-style: italic;
-        }
-
-        .cake-subtitle {
-            font-size: 0.95em;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 20px;
-        }
-
-        .cake-container {
-            width: 300px;
-            height: 300px;
-            margin: 20px auto;
-            position: relative;
-        }
-
-        .cake-instruction {
-            font-size: 0.9em;
-            color: var(--cosmic-gold);
-            font-style: italic;
-            margin-top: 15px;
-            opacity: 0.8;
-        }
-
-        /* Wish Lantern Section */
-        .lantern-section {
-            text-align: center;
-            margin: 50px auto;
-            padding: 30px 20px;
-            max-width: 700px;
-            opacity: 0;
-            animation: fadeInScale 1s forwards 1.1s;
-        }
-
-        .lantern-title {
-            font-size: 1.8em;
-            margin-bottom: 15px;
             background: linear-gradient(
                 90deg,
                 var(--cosmic-pink),
-                var(--cosmic-accent),
-                var(--cosmic-gold)
+                var(--cosmic-accent)
             );
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .lantern-subtitle {
-            font-size: 1em;
+        .hint-text {
+            font-size: 0.95em;
             color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .lantern-display {
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            line-height: 1.6;
         }
 
         /* Poem Title */
@@ -625,6 +563,7 @@
             text-align: center;
             font-size: 1.5em;
             margin: 50px 0;
+            padding: 30px;
             font-weight: bold;
             background: linear-gradient(
                 90deg,
@@ -646,54 +585,6 @@
             animation: fadeInScale 1s forwards, shimmer 4s linear infinite;
         }
 
-        /* Wish Message Popup */
-        .wish-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: linear-gradient(
-                135deg,
-                rgba(183, 148, 246, 0.95),
-                rgba(159, 122, 234, 0.95)
-            );
-            padding: 30px 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            z-index: 10001;
-            max-width: 500px;
-            text-align: center;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            pointer-events: none;
-        }
-
-        .wish-message.show {
-            transform: translate(-50%, -50%) scale(1);
-            pointer-events: auto;
-        }
-
-        .wish-message-text {
-            font-size: 1.2em;
-            line-height: 1.6;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .wish-message-close {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .wish-message-close:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 1.5em; }
@@ -701,14 +592,6 @@
             .perf-stats {
                 font-size: 8px;
                 padding: 8px;
-            }
-            .cake-container {
-                width: 250px;
-                height: 250px;
-            }
-            .wish-message {
-                max-width: 90%;
-                padding: 25px 20px;
             }
         }
 
@@ -748,17 +631,10 @@
 
     <!-- Optimized Canvas Layers -->
     <canvas id="starCanvas"></canvas>
+    <canvas id="shootingStarCanvas"></canvas>
     <canvas id="orbCanvas"></canvas>
     <canvas id="trailCanvas"></canvas>
     <canvas id="sparkleCanvas"></canvas>
-    <canvas id="lanternCanvas"></canvas>
-    <canvas id="cakeCanvas"></canvas>
-
-    <!-- Wish Message Popup -->
-    <div class="wish-message" id="wishMessage">
-        <div class="wish-message-text" id="wishMessageText"></div>
-        <button class="wish-message-close" onclick="closeWishMessage()">✨ Close ✨</button>
-    </div>
 
     <div class="container" id="mainContainer">
         <h1>Happy 19th Birthday, Eva! 🎂✨</h1>
@@ -788,20 +664,12 @@
             </audio>
         </div>
 
-        <!-- Interactive Birthday Cake -->
-        <div class="cake-section">
-            <div class="cake-title">🎂 Your Birthday Cake 🎂</div>
-            <div class="cake-subtitle">Click the candles to make a wish!</div>
-            <div class="cake-container" id="cakeContainer"></div>
-            <div class="cake-instruction">✨ Click each candle to light it, then blow them out with a click! ✨</div>
-        </div>
-
-        <!-- Wish Lanterns Section -->
-        <div class="lantern-section">
-            <div class="lantern-title">🏮 Wish Lanterns 🏮</div>
-            <div class="lantern-subtitle">Click the floating lanterns to reveal birthday wishes</div>
-            <div class="lantern-display">
-                (Look for the glowing lanterns floating across the screen above!)
+        <!-- Interactive Hint -->
+        <div class="interactive-hint">
+            <div class="hint-title">✨ Interactive Experience ✨</div>
+            <div class="hint-text">
+                Move your mouse (or finger) across the screen to paint the cosmos with shimmering star trails.<br>
+                Click anywhere to create bursts of cosmic sparkles and watch shooting stars dance across the sky!
             </div>
         </div>
 
@@ -836,7 +704,7 @@
         'use strict';
 
         // ============================================================
-        // OPTIMIZED COSMIC BIRTHDAY FOR EVA - FULLY FEATURED
+        // OPTIMIZED COSMIC BIRTHDAY FOR EVA
         // ============================================================
 
         /**
@@ -1020,10 +888,11 @@
             const lifetimes = new Float32Array(maxParticles);
             const maxLifetimes = new Float32Array(maxParticles);
             const sizes = new Float32Array(maxParticles);
+            const hues = new Float32Array(maxParticles);
             
             let count = 0;
             
-            const spawn = (x, y, vx, vy, lifetime, size) => {
+            const spawn = (x, y, vx, vy, lifetime, size, hue = 270) => {
                 if (count >= maxParticles) {
                     count = Math.floor(maxParticles * 0.9);
                 }
@@ -1038,6 +907,7 @@
                 lifetimes[idx] = lifetime;
                 maxLifetimes[idx] = lifetime;
                 sizes[idx] = size;
+                hues[idx] = hue;
                 
                 return idx;
             };
@@ -1053,8 +923,8 @@
                     positions[idx2 + 1] += velocities[idx2 + 1] * dt;
                     
                     if (width > 0 && height > 0) {
-                        if (positions[idx2] < 0 || positions[idx2] > width ||
-                            positions[idx2 + 1] < 0 || positions[idx2 + 1] > height) {
+                        if (positions[idx2] < -50 || positions[idx2] > width + 50 ||
+                            positions[idx2 + 1] < -50 || positions[idx2 + 1] > height + 50) {
                             lifetimes[i] = 0;
                         }
                     }
@@ -1072,6 +942,7 @@
                         lifetimes[writeIdx] = lifetimes[i];
                         maxLifetimes[writeIdx] = maxLifetimes[i];
                         sizes[writeIdx] = sizes[i];
+                        hues[writeIdx] = hues[i];
                     }
                     
                     writeIdx++;
@@ -1089,6 +960,7 @@
                 getLifetimes: () => lifetimes,
                 getMaxLifetimes: () => maxLifetimes,
                 getSizes: () => sizes,
+                getHues: () => hues,
                 clear: () => { count = 0; }
             });
         };
@@ -1166,43 +1038,6 @@
             });
         };
 
-        /**
-         * Wish messages for lanterns
-         */
-        const WISH_MESSAGES = [
-            "May this year bring you the friendships you deserve 💜",
-            "You are stronger than you know, Eva ✨",
-            "Here's to new beginnings and brighter days 🌟",
-            "Your resilience is inspiring—never forget that 🌙",
-            "May you find joy in unexpected places 🎨",
-            "You matter, and your story is still being written 📖",
-            "Wishing you moments of peace and clarity 🕊️",
-            "May kindness find you in surprising ways 🌸",
-            "Here's to your courage and your journey 🦋",
-            "You're not alone—better days are coming 🌈"
-        ];
-
-        /**
-         * Show wish message popup
-         */
-        function showWishMessage(message) {
-            const popup = document.getElementById('wishMessage');
-            const text = document.getElementById('wishMessageText');
-            
-            text.textContent = message;
-            popup.classList.add('show');
-        }
-
-        /**
-         * Close wish message popup
-         */
-        function closeWishMessage() {
-            const popup = document.getElementById('wishMessage');
-            popup.classList.remove('show');
-        }
-
-        window.closeWishMessage = closeWishMessage;
-
         // ============================================================
         // MAIN APPLICATION
         // ============================================================
@@ -1211,36 +1046,26 @@
             const state = createState({
                 mouseX: window.innerWidth / 2,
                 mouseY: window.innerHeight / 2,
+                prevMouseX: window.innerWidth / 2,
+                prevMouseY: window.innerHeight / 2,
                 scrollProgress: 0,
                 time: 0,
                 isPlaying: false,
                 canvasReady: false,
                 isPaused: false,
-                reductionFactor: 1.0,
-                cakeLit: false,
-                candlesLit: 0
+                reductionFactor: 1.0
             });
             
             const renderers = new Map();
             
-            const sparkles = createParticleSystem(500);
-            const trails = createParticleSystem(300);
+            const sparkles = createParticleSystem(800);
+            const trails = createParticleSystem(500);
             const orbs = createParticleSystem(50);
+            const shootingStars = createParticleSystem(20);
             
-            const STAR_COUNT = 200;
+            const STAR_COUNT = 250;
             const stars = new Float32Array(STAR_COUNT * 5);
             const orbVelocities = new Float32Array(50 * 2);
-            
-            // Lantern system
-            const MAX_LANTERNS = 8;
-            const lanterns = new Float32Array(MAX_LANTERNS * 7); // x, y, vx, vy, size, hue, phase
-            let lanternCount = 0;
-            const usedWishes = new Set();
-            
-            // Cake system
-            const CANDLE_COUNT = 19;
-            const candles = new Array(CANDLE_COUNT);
-            let cakeReady = false;
             
             const initStars = () => {
                 for (let i = 0; i < STAR_COUNT; i++) {
@@ -1260,7 +1085,7 @@
                     renderers.set('starCanvas', starRenderer);
                 }
                 
-                ['sparkleCanvas', 'trailCanvas', 'orbCanvas', 'lanternCanvas', 'cakeCanvas'].forEach(id => {
+                ['sparkleCanvas', 'trailCanvas', 'orbCanvas', 'shootingStarCanvas'].forEach(id => {
                     const renderer = createRenderer(id, { alpha: true });
                     if (renderer) {
                         renderer.resize();
@@ -1286,12 +1111,12 @@
                     width / 2, height / 2, width
                 );
                 gradient.addColorStop(0, `rgba(138, 43, 226, ${0.02 + currentState.scrollProgress * 0.03})`);
+                gradient.addColorStop(0.5, `rgba(72, 61, 139, ${0.01})`);
                 gradient.addColorStop(1, 'transparent');
                 ctx.fillStyle = gradient;
                 ctx.fillRect(0, 0, width, height);
                 
                 ctx.fillStyle = 'white';
-                ctx.beginPath();
                 
                 for (let i = 0; i < STAR_COUNT; i++) {
                     const idx = i * 5;
@@ -1305,32 +1130,38 @@
                     const offsetY = (currentState.mouseY / height - 0.5) * parallax * 50;
                     
                     const brightness = Math.sin(phase) * 0.5 + 0.5;
-                    ctx.globalAlpha = brightness * 0.8 + 0.2;
+                    const alpha = brightness * 0.8 + 0.2;
                     
-                    ctx.moveTo(x + offsetX + size, y + offsetY);
-                    ctx.arc(x + offsetX, y + offsetY, size, 0, Math.PI * 2);
+                    const starGradient = ctx.createRadialGradient(
+                        x + offsetX, y + offsetY, 0,
+                        x + offsetX, y + offsetY, size * 2
+                    );
+                    starGradient.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
+                    starGradient.addColorStop(0.5, `rgba(183, 148, 246, ${alpha * 0.5})`);
+                    starGradient.addColorStop(1, 'transparent');
+                    
+                    ctx.fillStyle = starGradient;
+                    ctx.fillRect(x + offsetX - size * 2, y + offsetY - size * 2, size * 4, size * 4);
                     
                     stars[idx + 4] += stars[idx + 3] * dt * 1000;
                 }
-                
-                ctx.fill();
-                ctx.globalAlpha = 1;
             };
             
             const createSparkles = (x, y) => {
                 const currentState = state.get();
-                const effectiveCount = Math.floor(5 * currentState.reductionFactor);
+                const effectiveCount = Math.floor(8 * currentState.reductionFactor);
                 
                 for (let i = 0; i < effectiveCount; i++) {
                     const angle = Math.random() * Math.PI * 2;
-                    const speed = Math.random() * 50 + 25;
+                    const speed = Math.random() * 100 + 50;
                     
                     const vel = vec2Pool.acquire(
                         Math.cos(angle) * speed,
                         Math.sin(angle) * speed
                     );
                     
-                    sparkles.spawn(x, y, vel.x, vel.y, Math.random() * 0.5 + 0.3, Math.random() * 3 + 1);
+                    const hue = 250 + Math.random() * 60;
+                    sparkles.spawn(x, y, vel.x, vel.y, Math.random() * 0.8 + 0.4, Math.random() * 4 + 2, hue);
                     vec2Pool.release(vel);
                 }
             };
@@ -1338,7 +1169,7 @@
             const renderSparkles = (dt) => {
                 const { width, height } = renderers.get('starCanvas')?.getDimensions() || { width: window.innerWidth, height: window.innerHeight };
                 
-                sparkles.update(dt, 100, width, height);
+                sparkles.update(dt, 150, width, height);
                 
                 const renderer = renderers.get('sparkleCanvas');
                 if (!renderer) return;
@@ -1350,7 +1181,10 @@
                 const lifetimes = sparkles.getLifetimes();
                 const maxLifetimes = sparkles.getMaxLifetimes();
                 const sizes = sparkles.getSizes();
+                const hues = sparkles.getHues();
                 const count = sparkles.getCount();
+                
+                ctx.globalCompositeOperation = 'lighter';
                 
                 for (let i = 0; i < count; i++) {
                     const idx2 = i * 2;
@@ -1358,26 +1192,47 @@
                     const y = positions[idx2 + 1];
                     const life = lifetimes[i] / maxLifetimes[i];
                     const size = sizes[i];
+                    const hue = hues[i];
                     
-                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size * 3);
-                    gradient.addColorStop(0, `rgba(255, 255, 255, ${life})`);
-                    gradient.addColorStop(0.5, `rgba(183, 148, 246, ${life * 0.5})`);
+                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size * 4);
+                    gradient.addColorStop(0, `hsla(${hue}, 100%, 90%, ${life})`);
+                    gradient.addColorStop(0.3, `hsla(${hue}, 80%, 70%, ${life * 0.7})`);
+                    gradient.addColorStop(0.6, `hsla(${hue}, 70%, 60%, ${life * 0.4})`);
                     gradient.addColorStop(1, 'transparent');
                     
                     ctx.fillStyle = gradient;
-                    ctx.fillRect(x - size * 3, y - size * 3, size * 6, size * 6);
+                    ctx.fillRect(x - size * 4, y - size * 4, size * 8, size * 8);
                 }
+                
+                ctx.globalCompositeOperation = 'source-over';
             };
             
-            const createTrail = (x, y) => {
+            const createStarTrail = (x, y, prevX, prevY) => {
                 const currentState = state.get();
-                if (Math.random() < currentState.reductionFactor) {
-                    const vel = vec2Pool.acquire(
-                        (Math.random() - 0.5) * 20,
-                        (Math.random() - 0.5) * 20
-                    );
-                    trails.spawn(x, y, vel.x, vel.y, 1.5, 2);
-                    vec2Pool.release(vel);
+                const dx = x - prevX;
+                const dy = y - prevY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < 2) return;
+                
+                const steps = Math.min(Math.floor(dist / 5), 15);
+                
+                for (let i = 0; i < steps; i++) {
+                    const t = i / steps;
+                    const px = prevX + dx * t;
+                    const py = prevY + dy * t;
+                    
+                    if (Math.random() < currentState.reductionFactor) {
+                        const vel = vec2Pool.acquire(
+                            (Math.random() - 0.5) * 30,
+                            (Math.random() - 0.5) * 30
+                        );
+                        
+                        const hue = 250 + Math.random() * 60;
+                        const size = Math.random() * 3 + 1;
+                        trails.spawn(px, py, vel.x, vel.y, 2.5, size, hue);
+                        vec2Pool.release(vel);
+                    }
                 }
             };
             
@@ -1395,6 +1250,8 @@
                 const positions = trails.getPositions();
                 const lifetimes = trails.getLifetimes();
                 const maxLifetimes = trails.getMaxLifetimes();
+                const sizes = trails.getSizes();
+                const hues = trails.getHues();
                 const count = trails.getCount();
                 
                 ctx.globalCompositeOperation = 'lighter';
@@ -1404,13 +1261,16 @@
                     const x = positions[idx2];
                     const y = positions[idx2 + 1];
                     const life = lifetimes[i] / maxLifetimes[i];
+                    const size = sizes[i];
+                    const hue = hues[i];
                     
-                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, 8);
-                    gradient.addColorStop(0, `rgba(183, 148, 246, ${life * 0.6})`);
+                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size * 5);
+                    gradient.addColorStop(0, `hsla(${hue}, 90%, 80%, ${life * 0.8})`);
+                    gradient.addColorStop(0.5, `hsla(${hue}, 80%, 70%, ${life * 0.5})`);
                     gradient.addColorStop(1, 'transparent');
                     
                     ctx.fillStyle = gradient;
-                    ctx.fillRect(x - 8, y - 8, 16, 16);
+                    ctx.fillRect(x - size * 5, y - size * 5, size * 10, size * 10);
                 }
                 
                 ctx.globalCompositeOperation = 'source-over';
@@ -1421,14 +1281,14 @@
                 
                 orbs.clear();
                 
-                for (let i = 0; i < 30; i++) {
+                for (let i = 0; i < 40; i++) {
                     const pos = vec2Pool.acquire(Math.random() * width, Math.random() * height);
-                    orbs.spawn(pos.x, pos.y, 0, 0, Infinity, Math.random() * 30 + 10);
+                    orbs.spawn(pos.x, pos.y, 0, 0, Infinity, Math.random() * 35 + 15, 250 + Math.random() * 60);
                     vec2Pool.release(pos);
                     
                     const idx2 = i * 2;
-                    orbVelocities[idx2] = (Math.random() - 0.5) * 20;
-                    orbVelocities[idx2 + 1] = (Math.random() - 0.5) * 20;
+                    orbVelocities[idx2] = (Math.random() - 0.5) * 25;
+                    orbVelocities[idx2 + 1] = (Math.random() - 0.5) * 25;
                 }
             };
             
@@ -1438,6 +1298,7 @@
                 
                 const positions = orbs.getPositions();
                 const sizes = orbs.getSizes();
+                const hues = orbs.getHues();
                 const count = orbs.getCount();
                 
                 const mousePos = vec2Pool.acquire(currentState.mouseX, currentState.mouseY);
@@ -1448,16 +1309,16 @@
                     const dx = mousePos.x - positions[idx2];
                     const dy = mousePos.y - positions[idx2 + 1];
                     const distSq = dx * dx + dy * dy;
-                    const threshold = 200 * 200;
+                    const threshold = 250 * 250;
                     
                     if (distSq > 0 && distSq < threshold) {
-                        const force = (threshold - distSq) / (threshold * 10);
+                        const force = (threshold - distSq) / (threshold * 15);
                         orbVelocities[idx2] += dx * force;
                         orbVelocities[idx2 + 1] += dy * force;
                     }
                     
-                    orbVelocities[idx2] *= 0.98;
-                    orbVelocities[idx2 + 1] *= 0.98;
+                    orbVelocities[idx2] *= 0.985;
+                    orbVelocities[idx2 + 1] *= 0.985;
                     
                     positions[idx2] += orbVelocities[idx2] * dt;
                     positions[idx2 + 1] += orbVelocities[idx2 + 1] * dt;
@@ -1491,347 +1352,107 @@
                 
                 ctx.globalCompositeOperation = 'lighter';
                 
-                const hue = 270 + Math.sin(currentState.time * 2) * 30;
+                const baseHue = 270 + Math.sin(currentState.time * 2) * 30;
                 
                 for (let i = 0; i < count; i++) {
                     const idx2 = i * 2;
                     const x = positions[idx2];
                     const y = positions[idx2 + 1];
                     const size = sizes[i];
-                    const orbHue = hue + i * 5;
+                    const orbHue = baseHue + hues[i] - 250;
                     
-                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-                    gradient.addColorStop(0, `hsla(${orbHue}, 70%, 60%, 0.3)`);
+                    const pulse = Math.sin(currentState.time * 3 + i) * 0.2 + 0.8;
+                    const effectiveSize = size * pulse;
+                    
+                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, effectiveSize);
+                    gradient.addColorStop(0, `hsla(${orbHue}, 80%, 70%, 0.4)`);
+                    gradient.addColorStop(0.5, `hsla(${orbHue}, 70%, 60%, 0.2)`);
                     gradient.addColorStop(1, 'transparent');
                     
                     ctx.fillStyle = gradient;
-                    ctx.fillRect(x - size, y - size, size * 2, size * 2);
+                    ctx.fillRect(x - effectiveSize, y - effectiveSize, effectiveSize * 2, effectiveSize * 2);
                 }
                 
                 ctx.globalCompositeOperation = 'source-over';
             };
             
-            // ============================================================
-            // WISH LANTERNS FEATURE
-            // ============================================================
+            // Shooting stars
+            let shootingStarTimer = 0;
             
-            const spawnLantern = () => {
-                if (lanternCount >= MAX_LANTERNS) return;
-                
+            const createShootingStar = () => {
                 const { width, height } = renderers.get('starCanvas')?.getDimensions() || { width: window.innerWidth, height: window.innerHeight };
                 
-                const idx = lanternCount * 7;
-                lanterns[idx] = -50; // x
-                lanterns[idx + 1] = Math.random() * height * 0.8 + height * 0.1; // y
-                lanterns[idx + 2] = 30 + Math.random() * 20; // vx
-                lanterns[idx + 3] = (Math.random() - 0.5) * 10; // vy
-                lanterns[idx + 4] = 25 + Math.random() * 15; // size
-                lanterns[idx + 5] = Math.random() * 60 + 20; // hue
-                lanterns[idx + 6] = Math.random() * Math.PI * 2; // phase
+                const startX = Math.random() * width;
+                const startY = -50;
                 
-                lanternCount++;
+                const angle = Math.random() * Math.PI / 3 + Math.PI / 6;
+                const speed = 300 + Math.random() * 200;
+                
+                const vx = Math.cos(angle) * speed;
+                const vy = Math.sin(angle) * speed;
+                
+                const hue = 200 + Math.random() * 100;
+                shootingStars.spawn(startX, startY, vx, vy, 3, 2, hue);
             };
             
-            const updateLanterns = (dt) => {
-                const { width } = renderers.get('starCanvas')?.getDimensions() || { width: window.innerWidth, height: window.innerHeight };
-                const currentTime = state.get().time;
+            const renderShootingStars = (dt) => {
+                const { width, height } = renderers.get('starCanvas')?.getDimensions() || { width: window.innerWidth, height: window.innerHeight };
                 
-                let writeIdx = 0;
+                shootingStars.update(dt, 0, width, height);
                 
-                for (let i = 0; i < lanternCount; i++) {
-                    const idx = i * 7;
-                    
-                    lanterns[idx] += lanterns[idx + 2] * dt;
-                    lanterns[idx + 1] += lanterns[idx + 3] * dt;
-                    lanterns[idx + 1] += Math.sin(currentTime * 2 + lanterns[idx + 6]) * 0.5;
-                    lanterns[idx + 6] += dt * 0.5;
-                    
-                    if (lanterns[idx] > width + 100) {
-                        continue;
-                    }
-                    
-                    if (i !== writeIdx) {
-                        const writeId = writeIdx * 7;
-                        for (let j = 0; j < 7; j++) {
-                            lanterns[writeId + j] = lanterns[idx + j];
-                        }
-                    }
-                    
-                    writeIdx++;
-                }
-                
-                lanternCount = writeIdx;
-            };
-            
-            const renderLanterns = () => {
-                const renderer = renderers.get('lanternCanvas');
+                const renderer = renderers.get('shootingStarCanvas');
                 if (!renderer) return;
                 
                 const { ctx } = renderer;
                 renderer.clear();
                 
-                const currentTime = state.get().time;
+                const positions = shootingStars.getPositions();
+                const velocities = shootingStars.getVelocities();
+                const lifetimes = shootingStars.getLifetimes();
+                const maxLifetimes = shootingStars.getMaxLifetimes();
+                const hues = shootingStars.getHues();
+                const count = shootingStars.getCount();
                 
-                for (let i = 0; i < lanternCount; i++) {
-                    const idx = i * 7;
-                    const x = lanterns[idx];
-                    const y = lanterns[idx + 1];
-                    const size = lanterns[idx + 4];
-                    const hue = lanterns[idx + 5];
-                    const phase = lanterns[idx + 6];
+                ctx.globalCompositeOperation = 'lighter';
+                
+                for (let i = 0; i < count; i++) {
+                    const idx2 = i * 2;
+                    const x = positions[idx2];
+                    const y = positions[idx2 + 1];
+                    const vx = velocities[idx2];
+                    const vy = velocities[idx2 + 1];
+                    const life = lifetimes[i] / maxLifetimes[i];
+                    const hue = hues[i];
                     
-                    const glow = Math.sin(currentTime * 3 + phase) * 0.3 + 0.7;
+                    const len = Math.sqrt(vx * vx + vy * vy) * 0.15;
+                    const angle = Math.atan2(vy, vx);
                     
-                    // Lantern body
-                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
-                    gradient.addColorStop(0, `hsla(${hue}, 80%, 70%, ${0.8 * glow})`);
-                    gradient.addColorStop(0.5, `hsla(${hue}, 70%, 60%, ${0.5 * glow})`);
+                    const endX = x - Math.cos(angle) * len;
+                    const endY = y - Math.sin(angle) * len;
+                    
+                    const gradient = ctx.createLinearGradient(x, y, endX, endY);
+                    gradient.addColorStop(0, `hsla(${hue}, 100%, 90%, ${life * 0.9})`);
+                    gradient.addColorStop(0.5, `hsla(${hue}, 90%, 80%, ${life * 0.6})`);
                     gradient.addColorStop(1, 'transparent');
                     
-                    ctx.fillStyle = gradient;
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = 3;
+                    ctx.lineCap = 'round';
                     ctx.beginPath();
-                    ctx.arc(x, y, size, 0, Math.PI * 2);
-                    ctx.fill();
-                    
-                    // Lantern core
-                    ctx.fillStyle = `hsla(${hue}, 90%, 80%, ${0.9 * glow})`;
-                    ctx.beginPath();
-                    ctx.arc(x, y, size * 0.4, 0, Math.PI * 2);
-                    ctx.fill();
-                    
-                    // Decorative lines
-                    ctx.strokeStyle = `hsla(${hue}, 70%, 50%, ${0.4 * glow})`;
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(x - size, y);
-                    ctx.lineTo(x + size, y);
-                    ctx.stroke();
-                    ctx.beginPath();
-                    ctx.moveTo(x, y - size);
-                    ctx.lineTo(x, y + size);
-                    ctx.stroke();
-                }
-            };
-            
-            const handleLanternClick = (x, y) => {
-                for (let i = 0; i < lanternCount; i++) {
-                    const idx = i * 7;
-                    const lx = lanterns[idx];
-                    const ly = lanterns[idx + 1];
-                    const size = lanterns[idx + 4];
-                    
-                    const dx = x - lx;
-                    const dy = y - ly;
-                    const distSq = dx * dx + dy * dy;
-                    
-                    if (distSq < size * size) {
-                        // Get random unused wish
-                        const availableWishes = WISH_MESSAGES.filter((_, i) => !usedWishes.has(i));
-                        if (availableWishes.length === 0) {
-                            usedWishes.clear();
-                        }
-                        
-                        const wishIndex = WISH_MESSAGES.findIndex(w => 
-                            w === availableWishes[Math.floor(Math.random() * availableWishes.length)]
-                        );
-                        
-                        usedWishes.add(wishIndex);
-                        showWishMessage(WISH_MESSAGES[wishIndex]);
-                        
-                        // Create sparkle effect
-                        for (let j = 0; j < 15; j++) {
-                            createSparkles(lx, ly);
-                        }
-                        
-                        // Remove lantern
-                        for (let j = idx; j < lanternCount * 7 - 7; j++) {
-                            lanterns[j] = lanterns[j + 7];
-                        }
-                        lanternCount--;
-                        
-                        return true;
-                    }
-                }
-                return false;
-            };
-            
-            // ============================================================
-            // BIRTHDAY CAKE FEATURE
-            // ============================================================
-            
-            const initCake = () => {
-                const container = document.getElementById('cakeContainer');
-                if (!container) return;
-                
-                const canvas = document.getElementById('cakeCanvas');
-                if (!canvas) return;
-                
-                const rect = container.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                
-                const radius = 80;
-                const angleStep = (Math.PI * 1.5) / (CANDLE_COUNT - 1);
-                const startAngle = Math.PI * 0.75;
-                
-                for (let i = 0; i < CANDLE_COUNT; i++) {
-                    const angle = startAngle + i * angleStep;
-                    candles[i] = {
-                        x: centerX + Math.cos(angle) * radius,
-                        y: centerY + Math.sin(angle) * radius - 30,
-                        lit: false,
-                        phase: Math.random() * Math.PI * 2
-                    };
-                }
-                
-                cakeReady = true;
-            };
-            
-            const renderCake = (dt) => {
-                const renderer = renderers.get('cakeCanvas');
-                if (!renderer || !cakeReady) return;
-                
-                const { ctx } = renderer;
-                const currentState = state.get();
-                const currentTime = currentState.time;
-                
-                renderer.clear();
-                
-                const container = document.getElementById('cakeContainer');
-                if (!container) return;
-                
-                const rect = container.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                
-                // Draw cake base
-                const cakeGradient = ctx.createLinearGradient(centerX, centerY - 50, centerX, centerY + 50);
-                cakeGradient.addColorStop(0, '#ff6b9d');
-                cakeGradient.addColorStop(0.5, '#b794f6');
-                cakeGradient.addColorStop(1, '#9f7aea');
-                
-                ctx.fillStyle = cakeGradient;
-                ctx.beginPath();
-                ctx.ellipse(centerX, centerY + 50, 100, 20, 0, 0, Math.PI * 2);
-                ctx.fill();
-                
-                ctx.fillRect(centerX - 100, centerY - 20, 200, 70);
-                
-                ctx.fillStyle = '#ffd89b';
-                ctx.beginPath();
-                ctx.ellipse(centerX, centerY - 20, 100, 20, 0, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Decorative frosting
-                for (let i = 0; i < 12; i++) {
-                    const angle = (i / 12) * Math.PI * 2;
-                    const x = centerX + Math.cos(angle) * 85;
-                    const y = centerY + 15;
-                    
-                    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-                    ctx.beginPath();
-                    ctx.arc(x, y, 8, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                
-                // Draw candles
-                let litCount = 0;
-                for (let i = 0; i < CANDLE_COUNT; i++) {
-                    const candle = candles[i];
-                    
-                    // Candle stick
-                    ctx.fillStyle = candle.lit ? '#ffe4b5' : '#f5deb3';
-                    ctx.fillRect(candle.x - 3, candle.y, 6, 25);
-                    
-                    // Wick
-                    ctx.strokeStyle = candle.lit ? '#ff6347' : '#333';
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(candle.x, candle.y);
-                    ctx.lineTo(candle.x, candle.y - 5);
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(endX, endY);
                     ctx.stroke();
                     
-                    if (candle.lit) {
-                        litCount++;
-                        candle.phase += dt * 5;
-                        
-                        // Flame
-                        const flicker = Math.sin(candle.phase) * 2;
-                        const flameY = candle.y - 10 + flicker;
-                        
-                        const flameGradient = ctx.createRadialGradient(
-                            candle.x, flameY, 0,
-                            candle.x, flameY, 8
-                        );
-                        flameGradient.addColorStop(0, '#fff');
-                        flameGradient.addColorStop(0.3, '#ffed4e');
-                        flameGradient.addColorStop(0.7, '#ff6b35');
-                        flameGradient.addColorStop(1, 'transparent');
-                        
-                        ctx.fillStyle = flameGradient;
-                        ctx.beginPath();
-                        ctx.arc(candle.x, flameY, 8, 0, Math.PI * 2);
-                        ctx.fill();
-                        
-                        // Glow
-                        const glowGradient = ctx.createRadialGradient(
-                            candle.x, flameY, 0,
-                            candle.x, flameY, 20
-                        );
-                        glowGradient.addColorStop(0, 'rgba(255, 237, 78, 0.4)');
-                        glowGradient.addColorStop(1, 'transparent');
-                        
-                        ctx.fillStyle = glowGradient;
-                        ctx.beginPath();
-                        ctx.arc(candle.x, flameY, 20, 0, Math.PI * 2);
-                        ctx.fill();
-                    }
-                }
-                
-                state.update({ candlesLit: litCount });
-            };
-            
-            const handleCakeClick = (x, y) => {
-                if (!cakeReady) return false;
-                
-                const currentState = state.get();
-                
-                // Check if all candles are lit and clicking to blow out
-                if (currentState.candlesLit === CANDLE_COUNT) {
-                    const allLit = candles.every(c => c.lit);
-                    if (allLit) {
-                        // Blow out animation
-                        candles.forEach(c => c.lit = false);
-                        
-                        // Create massive sparkle effect
-                        for (let i = 0; i < 50; i++) {
-                            const container = document.getElementById('cakeContainer');
-                            const rect = container.getBoundingClientRect();
-                            const cx = rect.left + rect.width / 2;
-                            const cy = rect.top + rect.height / 2;
-                            createSparkles(cx + (Math.random() - 0.5) * 200, cy + (Math.random() - 0.5) * 100);
-                        }
-                        
-                        showWishMessage("🎂 Happy Birthday, Eva! May all your wishes come true! 🎂");
-                        return true;
-                    }
-                }
-                
-                // Check candle clicks
-                for (let i = 0; i < CANDLE_COUNT; i++) {
-                    const candle = candles[i];
-                    const dx = x - candle.x;
-                    const dy = y - (candle.y - 5);
-                    const distSq = dx * dx + dy * dy;
+                    // Head glow
+                    const headGradient = ctx.createRadialGradient(x, y, 0, x, y, 8);
+                    headGradient.addColorStop(0, `hsla(${hue}, 100%, 95%, ${life})`);
+                    headGradient.addColorStop(1, 'transparent');
                     
-                    if (distSq < 400) { // 20px radius
-                        candle.lit = !candle.lit;
-                        createSparkles(candle.x, candle.y - 10);
-                        return true;
-                    }
+                    ctx.fillStyle = headGradient;
+                    ctx.fillRect(x - 8, y - 8, 16, 16);
                 }
                 
-                return false;
+                ctx.globalCompositeOperation = 'source-over';
             };
             
             const autoOptimize = () => {
@@ -1868,33 +1489,50 @@
                 const x = e.clientX;
                 const y = e.clientY;
                 
-                state.update({ mouseX: x, mouseY: y });
+                const currentState = state.get();
+                
+                createStarTrail(x, y, currentState.mouseX, currentState.mouseY);
+                
+                state.update({ 
+                    mouseX: x, 
+                    mouseY: y,
+                    prevMouseX: currentState.mouseX,
+                    prevMouseY: currentState.mouseY
+                });
                 
                 document.documentElement.style.setProperty('--mouse-x', `${(x / window.innerWidth) * 100}%`);
                 document.documentElement.style.setProperty('--mouse-y', `${(y / window.innerHeight) * 100}%`);
-                
-                if (Math.random() > 0.7) {
-                    createSparkles(x, y);
+            }, 16);
+            
+            const handleTouchMove = throttle((e) => {
+                if (e.touches.length > 0) {
+                    const touch = e.touches[0];
+                    const x = touch.clientX;
+                    const y = touch.clientY;
+                    
+                    const currentState = state.get();
+                    
+                    createStarTrail(x, y, currentState.mouseX, currentState.mouseY);
+                    
+                    state.update({ 
+                        mouseX: x, 
+                        mouseY: y,
+                        prevMouseX: currentState.mouseX,
+                        prevMouseY: currentState.mouseY
+                    });
+                    
+                    document.documentElement.style.setProperty('--mouse-x', `${(x / window.innerWidth) * 100}%`);
+                    document.documentElement.style.setProperty('--mouse-y', `${(y / window.innerHeight) * 100}%`);
                 }
-                createTrail(x, y);
             }, 16);
             
             const handleClick = (e) => {
-                const x = e.clientX;
-                const y = e.clientY;
+                const x = e.clientX || (e.touches && e.touches[0]?.clientX) || state.get().mouseX;
+                const y = e.clientY || (e.touches && e.touches[0]?.clientY) || state.get().mouseY;
                 
-                // Check cake click first
-                if (handleCakeClick(x, y)) {
-                    return;
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => createSparkles(x, y), i * 50);
                 }
-                
-                // Check lantern click
-                if (handleLanternClick(x, y)) {
-                    return;
-                }
-                
-                // Regular sparkles
-                createSparkles(x, y);
             };
             
             const handleScroll = rafDebounce(() => {
@@ -1926,10 +1564,6 @@
                         orbPos[i * 2] *= scaleX;
                         orbPos[i * 2 + 1] *= scaleY;
                     }
-                }
-                
-                if (cakeReady) {
-                    initCake();
                 }
                 
                 setTimeout(() => state.update({ isPaused: false }), 100);
@@ -1972,7 +1606,6 @@
             let lastTime = performance.now();
             let animationId = null;
             let frameSkipCount = 0;
-            let lanternSpawnTimer = 0;
             
             const animate = (currentTime) => {
                 animationId = requestAnimationFrame(animate);
@@ -1985,7 +1618,7 @@
                 if (frameSkipCount++ % 30 === 0) {
                     autoOptimize();
                     
-                    const totalParticles = sparkles.getCount() + trails.getCount() + orbs.getCount() + lanternCount;
+                    const totalParticles = sparkles.getCount() + trails.getCount() + orbs.getCount() + shootingStars.getCount();
                     updatePerfStat('particleCount', totalParticles);
                     
                     const poolStats = vec2Pool.getStats();
@@ -2001,22 +1634,18 @@
                 
                 state.update(s => ({ time: s.time + dt }));
                 
-                // Spawn lanterns periodically
-                lanternSpawnTimer += dt;
-                if (lanternSpawnTimer > 3 && lanternCount < MAX_LANTERNS) {
-                    spawnLantern();
-                    lanternSpawnTimer = 0;
+                // Spawn shooting stars
+                shootingStarTimer += dt;
+                if (shootingStarTimer > 2 && Math.random() < 0.5) {
+                    createShootingStar();
+                    shootingStarTimer = 0;
                 }
                 
                 renderStars(dt);
-                renderSparkles(dt);
-                renderTrails(dt);
+                renderShootingStars(dt);
                 renderOrbs(dt);
-                
-                updateLanterns(dt);
-                renderLanterns();
-                
-                renderCake(dt);
+                renderTrails(dt);
+                renderSparkles(dt);
                 
                 if (frameSkipCount % 60 === 0) {
                     vec2Pool.releaseAll();
@@ -2031,7 +1660,7 @@
                 
                 entryOverlay.classList.add('hidden');
                 
-                ['starCanvas', 'sparkleCanvas', 'trailCanvas', 'orbCanvas', 'lanternCanvas', 'cakeCanvas'].forEach(id => {
+                ['starCanvas', 'shootingStarCanvas', 'sparkleCanvas', 'trailCanvas', 'orbCanvas'].forEach(id => {
                     const canvas = document.getElementById(id);
                     if (canvas) canvas.classList.add('visible');
                 });
@@ -2059,7 +1688,6 @@
                 setTimeout(() => {
                     mainContainer.classList.add('visible');
                     setupIntersectionObserver();
-                    initCake();
                 }, 500);
                 
                 animationId = requestAnimationFrame(animate);
@@ -2071,7 +1699,9 @@
                 initOrbs();
                 
                 document.addEventListener('mousemove', handleMouseMove, { passive: true });
+                document.addEventListener('touchmove', handleTouchMove, { passive: true });
                 document.addEventListener('click', handleClick, { passive: true });
+                document.addEventListener('touchstart', handleClick, { passive: true });
                 window.addEventListener('scroll', handleScroll, { passive: true });
                 window.addEventListener('resize', handleResize);
                 
